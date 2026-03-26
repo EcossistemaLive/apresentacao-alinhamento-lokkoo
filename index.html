@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alinhamento Estratégico — Projeto Locur | Live Consultoria</title>
+    <meta name="description" content="Pauta executiva e plano de ação de 6 meses para estruturação do Projeto Locur. Governança, jurídico, tecnologia, operação e growth.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #06192a;
+            --card-bg: #0A243D;
+            --accent-color: #00e800;
+            --accent-glow: rgba(0, 232, 0, 0.15);
+            --text-primary: #ffffff;
+            --text-muted: #cccccc;
+            --text-dim: #8899aa;
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Merriweather', serif;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --warning: #ffa502;
+            --danger: #ff4757;
+            --info: #3498db;
+            --success: #00e800;
+            --space-sm: 1.5rem;
+            --space-md: 2rem;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--primary-bg);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 var(--space-md); }
+
+        /* ANIMATIONS */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* HEADER */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(6, 25, 42, 0.95); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color); padding: 0.8rem 0;
+        }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        header img { height: 35px; opacity: 0.9; }
+        .header-info { text-align: right; font-size: 0.8rem; color: var(--text-dim); }
+        .header-info span { color: var(--accent-color); font-weight: 600; }
+
+        /* HERO */
+        .hero {
+            padding: 120px 0 60px; text-align: center;
+            background: linear-gradient(180deg, rgba(0, 232, 0, 0.04) 0%, transparent 100%);
+        }
+        .hero h1 {
+            font-family: var(--font-secondary); font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero .subtitle { font-size: 1.05rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 2rem; }
+        .meta-badges { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            padding: 0.6rem 1.2rem; border-radius: 10px; font-size: 0.85rem;
+        }
+
+        /* SECTIONS */
+        section { margin-bottom: 3.5rem; }
+        .section-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.75rem; }
+        .section-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; background: var(--accent-glow);
+            color: var(--accent-color); border-radius: 8px; font-size: 0.85rem;
+            font-weight: 700; border: 1px solid rgba(0, 232, 0, 0.2); flex-shrink: 0;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 1.5rem; margin-bottom: var(--space-sm);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .card:hover { transform: translateY(-2px); border-color: rgba(0, 232, 0, 0.3); }
+        .card h3 { font-size: 1.05rem; margin-bottom: 0.75rem; color: var(--accent-color); }
+        .card p, .card li { color: var(--text-muted); font-size: 0.88rem; }
+        .card ul { list-style: none; padding: 0; }
+        .card ul li { padding: 0.35rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+        .card ul li:last-child { border: none; }
+
+        /* GRIDS */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-sm); }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+        /* KPI */
+        .stat-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 1.5rem; text-align: center; transition: transform 0.3s ease;
+        }
+        .stat-card:hover { transform: translateY(-3px); border-color: rgba(0, 232, 0, 0.3); }
+        .stat-card .stat-num { font-size: 2.2rem; font-weight: 700; color: var(--accent-color); }
+        .stat-card .stat-label { color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+        /* STATUS BADGES */
+        .status { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.72rem; font-weight: 600; }
+        .status-decision { background: rgba(0, 232, 0, 0.15); color: var(--success); }
+        .status-attention { background: rgba(255, 165, 2, 0.15); color: var(--warning); }
+        .status-risk { background: rgba(255, 71, 87, 0.15); color: var(--danger); }
+        .status-info { background: rgba(52, 152, 219, 0.15); color: var(--info); }
+
+        /* ALERTS */
+        .alert {
+            border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: var(--space-sm);
+            display: flex; align-items: flex-start; gap: 1rem;
+        }
+        .alert-warning { background: rgba(255, 165, 2, 0.1); border: 1px solid rgba(255, 165, 2, 0.3); }
+        .alert-info { background: rgba(52, 152, 219, 0.1); border: 1px solid rgba(52, 152, 219, 0.3); }
+        .alert-success { background: rgba(0, 232, 0, 0.08); border: 1px solid rgba(0, 232, 0, 0.2); }
+        .alert-danger { background: rgba(255, 71, 87, 0.08); border: 1px solid rgba(255, 71, 87, 0.25); }
+        .alert .alert-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .alert .alert-text { color: var(--text-muted); font-size: 0.88rem; }
+        .alert .alert-text strong { color: var(--text-primary); }
+
+        /* DELIBERATION CARDS */
+        .delib-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;
+            border-left: 3px solid var(--accent-color);
+        }
+        .delib-card h3 { display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem; margin-bottom: 0.8rem; color: var(--text-primary); flex-wrap: wrap; }
+        .delib-card .delib-summary { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.7; }
+        .delib-card .decision-box { background: rgba(0, 232, 0, 0.06); border: 1px solid rgba(0, 232, 0, 0.15); border-radius: 8px; padding: 1rem; margin-top: 1rem; }
+        .delib-card .decision-box strong { color: var(--accent-color); }
+        .delib-card .decision-box p { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.3rem; }
+
+        /* CHECKLIST */
+        .checklist-card {
+            background: var(--card-bg); border: 1px solid rgba(255,165,2,0.35);
+            border-radius: 12px; padding: 1.5rem;
+        }
+        .check-item {
+            display: flex; align-items: center; gap: 1rem; padding: 0.85rem 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.9rem;
+        }
+        .check-item:last-child { border: none; }
+        .check-item .check-icon { font-size: 1.3rem; width: 30px; flex-shrink: 0; text-align: center; color: var(--text-dim); }
+        .check-item strong { color: var(--text-primary); }
+
+        /* TABLE */
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { text-align: left; padding: 0.8rem; background: rgba(255, 255, 255, 0.04); color: var(--accent-color); font-weight: 600; }
+        td { padding: 0.8rem; border-bottom: 1px solid var(--border-color); color: var(--text-muted); }
+        td strong { color: var(--text-primary); }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border-color); margin-top: 4rem; }
+        footer p { color: var(--text-dim); font-size: 0.8rem; }
+        footer .dev-credit { opacity: 0.4; font-style: italic; font-size: 0.7rem; margin-top: 0.5rem; }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero { padding: 100px 0 40px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <img src="https://raw.githubusercontent.com/Clebito2/ConsultoriaLive/main/Logo%20live%20oficial-21.png"
+                alt="Live Consultoria">
+            <div class="header-info">
+                <div><span>Projeto Locur (Eduardo)</span></div>
+                <div>Alinhamento Estratégico — Plano 6 Meses</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero fade-in">
+        <h1>Alinhamento Estratégico<br>Projeto Locur 🚀</h1>
+        <p class="subtitle">Pauta executiva para definição de orçamentos, contratações e responsabilidades que viabilizarão a estruturação e escalada do <strong>Projeto Locur</strong> nos próximos 6 meses.</p>
+        <div class="meta-badges">
+            <div class="badge"><span>📅</span> Março de 2026</div>
+            <div class="badge"><span>⏱️</span> Horizonte: 6 Meses</div>
+            <div class="badge"><span>👥</span> Luiz Portal + Eduardo</div>
+            <div class="badge"><span>🎯</span> Deliberativo</div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- KPIs -->
+        <section class="fade-in">
+            <div class="grid-4">
+                <div class="stat-card">
+                    <div class="stat-num">6</div>
+                    <div class="stat-label">Meses de Estruturação</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">5</div>
+                    <div class="stat-label">Frentes de Atuação</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">3</div>
+                    <div class="stat-label">Contratações Necessárias</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">5</div>
+                    <div class="stat-label">Aprovações na Reunião</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. CONTEXTO -->
+        <section class="fade-in">
+            <div class="section-title"><span class="num">1</span> Contexto e Complexidade do Projecto</div>
+            <p class="section-desc">Visão executiva do diagnóstico inicial para alinhamento mútuo.</p>
+
+            <div class="delib-card">
+                <h3><span class="status status-attention">⚠️ Atenção</span> Locur é um projeto complexo e robusto</h3>
+                <p class="delib-summary">Após análise inicial, constatou-se que o <strong>Projeto Locur</strong> exige uma série de ações estruturais (jurídico, tecnologia, processos, financeiro e marketing) antes de entrar em operação plena. O <strong>cronograma de 6 meses</strong> abaixo detalha o roadmap de investimentos e contratações necessários para o cliente Eduardo.</p>
+                <div class="decision-box">
+                    <strong>🎯 Objetivo do Documento</strong>
+                    <p>Garantir que ao final desta reunião todos os <strong>5 itens de aprovação</strong> estejam deliberados, com responsáveis e budget definidos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. GOVERNANÇA E JURÍDICO -->
+        <section class="fade-in">
+            <div class="section-title"><span class="num">2</span> Trilha Legal & Compliance</div>
+            <p class="section-desc">Estruturação societária, proteção legal e enquadramento fiscal da operação.</p>
+
+            <div class="delib-card">
+                <h3><span class="status status-info">📋 Pendente</span> Estruturação Societária — Dra. Viviane Gaza</h3>
+                <p class="delib-summary">Contratação da <strong>Dra. Viviane Gaza</strong> para estruturação jurídica e societária do Projeto Locur, abrangendo Eduardo e sua filha. Além disso, a doutora conduzirá a elaboração dos documentos regulatórios da plataforma.</p>
+                <div class="decision-box">
+                    <strong>📌 Escopo do Contrato</strong>
+                    <p>Estrutura societária (Locur + Eduardo + Filha) • Termos de Uso da plataforma • Acordos de Confidencialidade para parceiros/fornecedores • Cláusulas de parceria</p>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fa-solid fa-scale-balanced"></i> Viabilidade ODR</h3>
+                    <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.8rem;">Contratação de consultoria especializada para avaliar a viabilidade de implantação de estrutura de <strong>Online Dispute Resolution (ODR)</strong> na plataforma.</p>
+                    <div class="status status-info">🔍 Análise necessária</div>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-receipt"></i> Planejamento Tributário</h3>
+                    <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.8rem;">Levantamento e definição do <strong>enquadramento tributário correto</strong> antes do início do faturamento. Escolha do regime (Simples, Lucro Presumido) para otimização fiscal desde a origem.</p>
+                    <div class="status status-attention">⚡ Urgente — Antes de faturar</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. TECNOLOGIA -->
+        <section class="fade-in">
+            <div class="section-title"><span class="num">3</span> Trilha Tech & Sistemas</div>
+            <p class="section-desc">Auditoria do código existente e implementação dos sistemas operacionais.</p>
+
+            <div class="delib-card" style="border-left-color: var(--danger);">
+                <h3><span class="status status-risk">🔴 Risco Técnico</span> Auditoria do Código-fonte</h3>
+                <p class="delib-summary">O código-fonte desenvolvido pela <strong>fábrica de software contratada</strong> por Eduardo precisa ser auditado (mínimo parcial) antes de qualquer investimento massivo em marketing. Um débito técnico oculto pode comprometer a experiência do usuário e a escalabilidade sob carga de tráfego.</p>
+                <div class="decision-box" style="background: rgba(255,71,87,0.06); border-color: rgba(255,71,87,0.2);">
+                    <strong style="color: var(--danger);">⚠️ Recomendação</strong>
+                    <p>A auditoria deve preceder o investimento em Tráfego Pago. Plataforma instável + tráfego pago = desperdício de budget.</p>
+                </div>
+            </div>
+
+            <div class="delib-card">
+                <h3><span class="status status-info">📋 Pendente</span> ERP + CRM — Gestão de Notas Fiscais e Entradas/Saídas</h3>
+                <p class="delib-summary">Para que a plataforma se torne <strong>operacional e auditável</strong>, é necessário implantar ferramentas de ERP e CRM que gerenciem:</p>
+                <div class="grid-2" style="margin-top: 1rem;">
+                    <div class="decision-box">
+                        <strong>💰 Financeiro (ERP)</strong>
+                        <p>Gestão de entradas e saídas de caixa, emissão e recebimento de notas fiscais de fornecedores e prestadores de serviço.</p>
+                    </div>
+                    <div class="decision-box">
+                        <strong>📊 Relacionamento (CRM)</strong>
+                        <p>Gestão de leads, parceiros e clientes B2B. Funil de onboarding de lojistas e acompanhamento de negociações.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. OPERAÇÃO E POPs -->
+        <section class="fade-in">
+            <div class="section-title"><span class="num">4</span> Trilha de Processos (POPs)</div>
+            <p class="section-desc">Levantamento e documentação de todos os fluxos operacionais necessários para a plataforma operar.</p>
+
+            <div class="alert alert-info">
+                <div class="alert-icon">📋</div>
+                <div class="alert-text">
+                    <strong>O que são os POPs?</strong><br>
+                    Procedimentos Operacionais Padrão (POPs) são os documentos que descrevem passo a passo como cada processo da empresa deve ser executado — desde a moderação de anúncios até o onboarding de lojistas, atendimento ao cliente e emissão de NFs. Sem POPs definidos, a operação depende integralmente de pessoas-chave, tornando-se frágil e não escalável.
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-list-check"></i> Processos a Mapear (Escopo Inicial)</h3>
+                <div class="grid-2" style="margin-top: 0.5rem;">
+                    <ul>
+                        <li>🛡️ Moderação e antifraude de anúncios</li>
+                        <li>🤝 Onboarding de lojistas B2B</li>
+                        <li>🎯 Onboarding de PF (compradores/vendedores)</li>
+                        <li>💳 Fluxo de pagamentos e emissão de NF</li>
+                    </ul>
+                    <ul>
+                        <li>📣 Gestão de canais de comunicação</li>
+                        <li>⚖️ Resolução de disputas (ODR)</li>
+                        <li>📊 Relatórios e KPIs mensais</li>
+                        <li>🔧 Suporte técnico e atendimento</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. GROWTH & FINANCEIRO -->
+        <section class="fade-in">
+            <div class="section-title"><span class="num">5</span> Trilha Business & Growth</div>
+            <p class="section-desc">Projeções financeiras, captação e aquisição de usuários.</p>
+
+            <div class="grid-2">
+                <div class="delib-card">
+                    <h3><span class="status status-info">📋 A Construir</span> Projeção 12 Meses (Pitch Deck)</h3>
+                    <p class="delib-summary">Elaboração de projeção financeira de 12 meses contemplando:</p>
+                    <ul style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem; list-style: none; padding: 0;">
+                        <li style="padding: 0.25rem 0;">📈 Faturamento projetado (curvas de crescimento)</li>
+                        <li style="padding: 0.25rem 0;">💰 Investimentos necessários mês a mês</li>
+                        <li style="padding: 0.25rem 0;">📉 Estrutura de custos fixos e variáveis</li>
+                        <li style="padding: 0.25rem 0;">🎯 Métricas de valuation para captação</li>
+                    </ul>
+                </div>
+                <div class="delib-card">
+                    <h3><span class="status status-info">📋 A Contratar</span> Especialista em Tráfego Pago</h3>
+                    <p class="delib-summary">Profissional responsável por estruturar e operar as campanhas de aquisição de usuários para a plataforma entrar em tração.</p>
+                    <div class="decision-box">
+                        <strong>📌 Escopo</strong>
+                        <p>Google Ads • Meta Ads • LinkedIn (segmento premium) • Projeção de CAC + ROI por canal</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CHECKLIST DE APROVAÇÕES -->
+        <section class="fade-in">
+            <div class="section-title"><span class="num">6</span> Deliberações e Aprovações desta Reunião</div>
+            <p class="section-desc">Os itens abaixo devem ser concluídos ao final do encontro de hoje com decisores definidos e budget aprovado.</p>
+
+            <div class="checklist-card">
+                <div class="check-item">
+                    <span class="check-icon"><i class="fa-regular fa-square"></i></span>
+                    <div><strong>Budget: Honorários da Dra. Viviane Gaza</strong><br>Definir teto de investimento e cronograma de contratação para estruturação societária e jurídica.</div>
+                </div>
+                <div class="check-item">
+                    <span class="check-icon"><i class="fa-regular fa-square"></i></span>
+                    <div><strong>Budget: Auditoria do Código-fonte</strong><br>Aprovar investimento e escopo (parcial ou total) para auditoria da entrega da fábrica de software.</div>
+                </div>
+                <div class="check-item">
+                    <span class="check-icon"><i class="fa-regular fa-square"></i></span>
+                    <div><strong>Budget: Tráfego Pago (Setup + Mídia)</strong><br>Definir o valor mensal de investimento em mídia paga e os honorários do especialista.</div>
+                </div>
+                <div class="check-item">
+                    <span class="check-icon"><i class="fa-regular fa-square"></i></span>
+                    <div><strong>Decisão: Stack de ERP e CRM</strong><br>Homologar a ferramenta de gestão financeira e de clientes que será implantada.</div>
+                </div>
+                <div class="check-item">
+                    <span class="check-icon"><i class="fa-regular fa-square"></i></span>
+                    <div><strong>Responsável: Mapeamento dos POPs</strong><br>Definir quem será o ponto focal para mapear e documentar os processos operacionais.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÓXIMOS PASSOS -->
+        <section class="fade-in">
+            <div class="section-title"><span class="num">7</span> Cronograma Macro — 6 Meses</div>
+            <p class="section-desc">Distribuição temporal das frentes para gestão de prioridades e investimentos.</p>
+
+            <div class="card" style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Frente</th>
+                            <th>Responsável</th>
+                            <th>Prazo</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Estruturação Societária</strong> — Dra. Viviane Gaza</td>
+                            <td>Luiz + Eduardo</td>
+                            <td>Mês 1–2</td>
+                            <td><span class="status status-attention">Aguardando</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Auditoria do Código</strong></td>
+                            <td>Live / Eduardo</td>
+                            <td>Mês 1</td>
+                            <td><span class="status status-risk">Urgente</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Abertura e Enquadramento Fiscal</strong></td>
+                            <td>Dra. Viviane Gaza</td>
+                            <td>Mês 1–3</td>
+                            <td><span class="status status-attention">Aguardando</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Termos de Uso + Confidencialidade</strong></td>
+                            <td>Dra. Viviane Gaza</td>
+                            <td>Mês 2</td>
+                            <td><span class="status status-info">Planejado</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Implantação ERP + CRM</strong></td>
+                            <td>Gestor Operacional</td>
+                            <td>Mês 2–3</td>
+                            <td><span class="status status-info">Planejado</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mapeamento dos POPs</strong></td>
+                            <td>A definir</td>
+                            <td>Mês 2–3</td>
+                            <td><span class="status status-info">Planejado</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Consultoria ODR</strong></td>
+                            <td>A definir</td>
+                            <td>Mês 3</td>
+                            <td><span class="status status-info">Planejado</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Projeção 12 meses + Pitch Deck</strong></td>
+                            <td>Live Consultoria</td>
+                            <td>Mês 3–4</td>
+                            <td><span class="status status-info">Planejado</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Setup Tráfego Pago</strong></td>
+                            <td>Especialista (a contratar)</td>
+                            <td>Mês 4</td>
+                            <td><span class="status status-info">Planejado</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Operação plena + Revisão</strong></td>
+                            <td>Todos</td>
+                            <td>Mês 5–6</td>
+                            <td><span class="status status-decision">Alvo</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert alert-success" style="margin-top: 1.5rem;">
+                <div class="alert-icon">🎯</div>
+                <div class="alert-text">
+                    <strong>Meta do Horizonte de 6 Meses:</strong> Ao final deste ciclo, o Projeto Locur deve estar com estrutura jurídica sólida, plataforma auditada, operação documentada, sistemas de gestão implantados e pronto para a fase de tração e captação de investimento.
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Protocolo AIOS Live Consultoria — Product Management</p>
+        <p class="dev-credit">Locur Strategic Alignment v1.0 • Março 2026</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>
